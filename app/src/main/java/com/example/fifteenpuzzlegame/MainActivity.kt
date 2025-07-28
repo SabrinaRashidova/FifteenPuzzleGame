@@ -2,20 +2,22 @@ package com.example.fifteenpuzzlegame
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Button
 import android.widget.GridLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fifteenpuzzlegame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     private lateinit var gridLayout: GridLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.rootLayout)
 
-        gridLayout = findViewById(R.id.gridLayout)
+        gridLayout = binding.gridLayout
         generateTiles()
     }
 
@@ -44,8 +46,8 @@ class MainActivity : AppCompatActivity() {
             val sizeInPx = (sizeInDp * scale).toInt()
 
             val params = GridLayout.LayoutParams().apply {
-                rowSpec = GridLayout.spec(i / 4)
-                columnSpec = GridLayout.spec(i % 4)
+//                rowSpec = GridLayout.spec(i / 4)
+//                columnSpec = GridLayout.spec(i % 4)
                 width = sizeInPx
                 height = sizeInPx
                 setMargins(8, 8, 8, 8)
