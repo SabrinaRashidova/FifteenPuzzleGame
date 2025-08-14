@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FifteenPuzzleGame" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.FifteenPuzzleGame" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/primary_color</item>
     </style>
 
-    <style name="Theme.FifteenPuzzleGame" parent="Base.Theme.FifteenPuzzleGame" />
+    <style name="Theme.FifteenPuzzleGame" parent="Base.Theme.FifteenPuzzleGame" >
+        <item name="color">@color/primary_color</item>
+    </style>
+
+
 </resources>

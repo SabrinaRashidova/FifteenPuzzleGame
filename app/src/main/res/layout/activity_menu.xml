@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <TextView
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/start_game_bg"
+        android:textStyle="italic|bold"
+        android:text="START GAME"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="30dp"/>
+
+
+</LinearLayout>
