@@ -25,6 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Restart"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_txt_rounded"
+                android:padding="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -34,6 +37,9 @@
                 android:id="@+id/txt_pasuse"
                 android:text="Pause"
                 android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_txt_rounded"
+                android:padding="8dp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
 
@@ -51,6 +57,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Moves : 0"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_txt_rounded"
+                android:padding="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -60,6 +69,9 @@
                 android:id="@+id/txt_timer"
                 android:text="Time : 0s"
                 android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_txt_rounded"
+                android:padding="8dp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
 
