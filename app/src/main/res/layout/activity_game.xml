@@ -8,7 +8,20 @@
     android:paddingTop="38dp"
     android:paddingHorizontal="24dp">
 
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/cherry_bomb_one"
+        android:text="@string/app_name"
+        android:textColor="#37474F"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <LinearLayout
+        android:layout_marginTop="14dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal">
@@ -25,11 +38,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Restart"
+                android:fontFamily="@font/cherry_bomb_one"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_txt_rounded"
+                android:background="@drawable/start_game_bg"
                 android:padding="8dp"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,11 +52,13 @@
                 android:id="@+id/txt_pasuse"
                 android:text="Pause"
                 android:textSize="18sp"
+                android:fontFamily="@font/cherry_bomb_one"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_txt_rounded"
+                android:background="@drawable/start_game_bg"
                 android:padding="8dp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"/>
 
         </LinearLayout>
 
@@ -58,10 +75,12 @@
                 android:layout_height="wrap_content"
                 android:text="Moves : 0"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_txt_rounded"
+                android:background="@drawable/start_game_bg"
                 android:padding="8dp"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:fontFamily="@font/cherry_bomb_one"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,25 +89,17 @@
                 android:text="Time : 0s"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_txt_rounded"
+                android:background="@drawable/start_game_bg"
                 android:padding="8dp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"/>
+                android:fontFamily="@font/cherry_bomb_one"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#37474F"
-        android:layout_marginBottom="24dp"/>
 
     <GridLayout
         android:id="@+id/gridLayout"

@@ -1,31 +1,60 @@
 package com.example.fifteenpuzzlegame.ui
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.GridLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.example.fifteenpuzzlegame.R
-import com.example.fifteenpuzzlegame.R.color
 import com.example.fifteenpuzzlegame.databinding.ActivityGameBinding
 import com.example.fifteenpuzzlegame.databinding.DialogGameOverBinding
 
 class GameActivity : AppCompatActivity() {
+
      lateinit var binding: ActivityGameBinding
 
      lateinit var gridLayout: GridLayout
      var  numbers: MutableList<Int> = mutableListOf()
+     lateinit var tiles: MutableList<Button>
+     var emptyTileIndex = 15
+     var countMoves = 0
+    private var seconds = 0
+    private var isRunning = false
+    private val handler = Handler(Looper.getMainLooper())
+
+    private val runnable = object : Runnable {
+        override fun run() {
+            if (isRunning) {
+                seconds++
+                val hours = seconds / 3600
+                val mins = seconds / 60
+                val secs = seconds % 60
+                val timeText = when {
+                    hours > 0 -> String.format("Time : %d:%02d:%02d", hours, mins, secs)
+                    mins > 0 -> String.format("Time : %d:%02d", mins, secs)
+                    else -> "Time : ${secs}s"
+                }
+
+                binding.txtTimer.text = timeText
+                handler.postDelayed(this, 1000)
+            }
+        }
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        startTimer()
 
         gridLayout = binding.gridLayout
         initList()
@@ -36,10 +65,6 @@ class GameActivity : AppCompatActivity() {
             restartGame()
         }
     }
-
-    private lateinit var tiles: MutableList<Button>
-    private var emptyTileIndex = 15
-
 
     private fun initList(){
         numbers.clear()
@@ -63,6 +88,9 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun restartGame(){
+        countMoves = 0
+        binding.txtMoveCounter.text = "Moves: $countMoves"
+        seconds = 0
         shuffleNumber()
         updateGridUI()
     }
@@ -84,7 +112,7 @@ class GameActivity : AppCompatActivity() {
             tile.setTextColor(Color.WHITE)
             tile.setBackgroundColor(getColor(R.color.primary_color))
             tile.setPadding(8, 8, 8, 8)
-
+            tile.typeface= ResourcesCompat.getFont(this, R.font.cherry_bomb_one)
             val sizeInDp = 80
             val scale = resources.displayMetrics.density
             val sizeInPx = (sizeInDp * scale).toInt()
@@ -105,6 +133,8 @@ class GameActivity : AppCompatActivity() {
                 if (isAdjacent(clickedIndex, emptyTileIndex)) {
                     swapTiles(clickedIndex, emptyTileIndex)
                     emptyTileIndex = clickedIndex
+                    countMoves++
+                    binding.txtMoveCounter.text = "Moves: $countMoves"
 
                     if (checkWin()){
                         val dialogbinding: DialogGameOverBinding = DialogGameOverBinding.inflate(layoutInflater)
@@ -146,6 +176,11 @@ class GameActivity : AppCompatActivity() {
 //    fun isSolvable(numbers: List<Int>): Boolean {
 //
 //    }
+
+    fun startTimer(){
+        isRunning = true
+        handler.post(runnable)
+    }
 
     override fun onPause() {
         super.onPause()

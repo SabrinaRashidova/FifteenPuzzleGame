@@ -13,9 +13,6 @@
         android:theme="@style/Theme.FifteenPuzzleGame"
         tools:targetApi="31">
         <activity
-            android:name=".ui.GameOverActivity"
-            android:exported="false" />
-        <activity
             android:name=".MenuActivity"
             android:exported="true">
             <intent-filter>
@@ -33,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

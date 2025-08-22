@@ -18,7 +18,8 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:paddingVertical="20dp"
-        android:paddingHorizontal="30dp"/>
+        android:paddingHorizontal="30dp"
+        android:foreground="?attr/selectableItemBackground"/>
 
 
 </LinearLayout>
