@@ -36,8 +36,8 @@ class GameActivity : AppCompatActivity() {
                 val mins = seconds / 60
                 val secs = seconds % 60
                 val timeText = when {
-                    hours > 0 -> String.format("Time : %d:%02d:%02d", hours, mins, secs)
-                    mins > 0 -> String.format("Time : %d:%02d", mins, secs)
+                    hours > 0 -> String.format("Time : %02d:%02d:%02d", hours, mins, secs)
+                    mins > 0 -> String.format("Time : %02d:%02d", mins, secs)
                     else -> "Time : ${secs}s"
                 }
 
@@ -46,6 +46,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
@@ -90,9 +91,10 @@ class GameActivity : AppCompatActivity() {
     private fun restartGame(){
         countMoves = 0
         binding.txtMoveCounter.text = "Moves: $countMoves"
-        seconds = 0
+        resetTimer()
         shuffleNumber()
         updateGridUI()
+//        startTimer()
     }
 
     private fun shuffleNumber(){
@@ -182,9 +184,42 @@ class GameActivity : AppCompatActivity() {
         handler.post(runnable)
     }
 
+    private fun stopTimer() {
+        isRunning = false
+        handler.removeCallbacks(runnable)
+    }
+
+    private fun resetTimer() {
+        stopTimer()
+        seconds = 0
+        binding.txtTimer.text = "Time : 0s"
+    }
+
+    fun loadGameState(){
+
+    }
+
+    fun boardToString(): String {
+        return numbers.joinToString(",")
+    }
+
+    fun stringToBoard(boardString: String): MutableList<Int> {
+        return boardString.split(",").map { it.toInt() }.toMutableList()
+    }
+
     override fun onPause() {
+        stopTimer()
         super.onPause()
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isRunning){
+            startTimer()
+        }
+    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
