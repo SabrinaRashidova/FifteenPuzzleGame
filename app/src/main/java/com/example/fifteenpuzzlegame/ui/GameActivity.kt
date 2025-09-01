@@ -26,6 +26,8 @@ class GameActivity : AppCompatActivity() {
      var countMoves = 0
     private var seconds = 0
     private var isRunning = false
+
+    var isPaused = false
     private val handler = Handler(Looper.getMainLooper())
 
     private val runnable = object : Runnable {
@@ -65,6 +67,19 @@ class GameActivity : AppCompatActivity() {
         binding.txtRestart.setOnClickListener {
             restartGame()
         }
+
+        binding.txtPasuse.setOnClickListener {
+            if (!isPaused) {
+                stopTimer()
+                binding.txtPasuse.text = "Resume"
+                isPaused = true
+            } else {
+                startTimer()
+                binding.txtPasuse.text = "Pause"
+                isPaused = false
+            }
+        }
+
     }
 
     private fun initList(){
@@ -94,7 +109,7 @@ class GameActivity : AppCompatActivity() {
         resetTimer()
         shuffleNumber()
         updateGridUI()
-//        startTimer()
+        startTimer()
     }
 
     private fun shuffleNumber(){
@@ -195,18 +210,6 @@ class GameActivity : AppCompatActivity() {
         binding.txtTimer.text = "Time : 0s"
     }
 
-    fun loadGameState(){
-
-    }
-
-    fun boardToString(): String {
-        return numbers.joinToString(",")
-    }
-
-    fun stringToBoard(boardString: String): MutableList<Int> {
-        return boardString.split(",").map { it.toInt() }.toMutableList()
-    }
-
     override fun onPause() {
         stopTimer()
         super.onPause()
@@ -218,8 +221,6 @@ class GameActivity : AppCompatActivity() {
             startTimer()
         }
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()
