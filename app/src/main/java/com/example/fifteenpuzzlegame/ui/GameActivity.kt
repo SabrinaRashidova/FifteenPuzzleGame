@@ -18,19 +18,16 @@ import com.example.fifteenpuzzlegame.databinding.DialogGameOverBinding
 class GameActivity : AppCompatActivity() {
 
      lateinit var binding: ActivityGameBinding
-
      lateinit var gridLayout: GridLayout
      var  numbers: MutableList<Int> = mutableListOf()
      lateinit var tiles: MutableList<Button>
      var emptyTileIndex = 15
      var countMoves = 0
-    private var seconds = 0
-    private var isRunning = false
-
-    var isPaused = false
-    private val handler = Handler(Looper.getMainLooper())
-
-    private val runnable = object : Runnable {
+     var seconds = 0
+     var isRunning = false
+     var isPaused = false
+     val handler = Handler(Looper.getMainLooper())
+     val runnable = object : Runnable {
         override fun run() {
             if (isRunning) {
                 seconds++
@@ -62,7 +59,7 @@ class GameActivity : AppCompatActivity() {
         gridLayout = binding.gridLayout
         initList()
 
-//        shuffleNumber()
+        shuffleNumber()
         updateGridUI()
         binding.txtRestart.setOnClickListener {
             restartGame()
@@ -82,13 +79,13 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun initList(){
+     fun initList(){
         numbers.clear()
         numbers.addAll(1..15)
         numbers.add(0)
     }
 
-    private fun isAdjacent(index1: Int, index2: Int): Boolean {
+     fun isAdjacent(index1: Int, index2: Int): Boolean {
         val row1 = index1 / 4
         val col1 = index1 % 4
         val row2 = index2 / 4
@@ -97,13 +94,13 @@ class GameActivity : AppCompatActivity() {
                 (col1 == col2 && Math.abs(row1 - row2) == 1)
     }
 
-    private fun swapTiles(i: Int, j: Int) {
+     fun swapTiles(i: Int, j: Int) {
         val tempText = tiles[i].text
         tiles[i].text = tiles[j].text
         tiles[j].text = tempText
     }
 
-    private fun restartGame(){
+     fun restartGame(){
         countMoves = 0
         binding.txtMoveCounter.text = "Moves: $countMoves"
         resetTimer()
@@ -112,11 +109,11 @@ class GameActivity : AppCompatActivity() {
         startTimer()
     }
 
-    private fun shuffleNumber(){
+     fun shuffleNumber(){
         numbers.shuffle()
     }
 
-    private fun updateGridUI(){
+     fun updateGridUI(){
         gridLayout.removeAllViews()
         tiles = mutableListOf()
 
@@ -190,21 +187,17 @@ class GameActivity : AppCompatActivity() {
         return tiles[15].text.toString().isEmpty()
     }
 
-//    fun isSolvable(numbers: List<Int>): Boolean {
-//
-//    }
-
     fun startTimer(){
         isRunning = true
         handler.post(runnable)
     }
 
-    private fun stopTimer() {
+     fun stopTimer() {
         isRunning = false
         handler.removeCallbacks(runnable)
     }
 
-    private fun resetTimer() {
+     fun resetTimer() {
         stopTimer()
         seconds = 0
         binding.txtTimer.text = "Time : 0s"
